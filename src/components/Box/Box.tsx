@@ -19,6 +19,8 @@ import {
 } from 'react-native';
 
 export const Box = createBox<Theme>();
+//boxProps já existe na lib do restyle.
+export type boxProps = React.ComponentProps<typeof Box>;
 
 export type TouchableOpacityBoxProps = BackgroundColorProps<Theme> &
   SpacingProps<Theme> &
