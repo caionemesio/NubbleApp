@@ -9,7 +9,7 @@ import {$fontFamily, $fontSizes, Text} from '../Text/Text';
 import {useAppTheme} from '../../hooks/useAppTheme';
 import {useRef} from 'react';
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
   RightComponent?: React.ReactElement;
@@ -35,6 +35,15 @@ export function TextInput({
     padding: 's16',
     borderColor: errorMessage ? 'error' : 'gray4',
     borderRadius: 's12',
+  };
+
+  const $textInputStyle: TextStyle = {
+    padding: 0,
+    flexGrow: 1,
+    flexShrink: 1,
+    fontFamily: $fontFamily.regular,
+    color: colors.grayBlack,
+    ...$fontSizes.paragraphMedium,
   };
 
   return (
@@ -65,11 +74,3 @@ export function TextInput({
     </Box>
   );
 }
-
-const $textInputStyle: TextStyle = {
-  padding: 0,
-  flexGrow: 1,
-  flexShrink: 1,
-  fontFamily: $fontFamily.regular,
-  ...$fontSizes.paragraphMedium,
-};

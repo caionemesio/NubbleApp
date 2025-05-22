@@ -1,3 +1,6 @@
+import { Pressable } from 'react-native';
+import { ArrowLeftIcon } from '../../assets/icons/ArrowLeftIcon';
+import { ArrowRightIcon } from '../../assets/icons/ArrowRightIcon';
 import {BellIcon} from '../../assets/icons/BellIcon';
 import {BellOnIcon} from '../../assets/icons/BellOnIcon';
 import {BookmarkFillIcon} from '../../assets/icons/BookmarkFillIcon';
@@ -35,19 +38,32 @@ interface IconProps {
   name: IconName;
   color?: ThemeColors;
   size?: number;
+  onPress?: () => void;
 }
 
 export function Icon({
   name,
   color = 'backgroundContrast',
   size = 20,
+  onPress
 }: IconProps) {
+
   const {colors} = useAppTheme();
   const SVGIcon = iconRegistry[name];
+
+  if (onPress){
+    return (
+      <Pressable hitSlop={10} onPress={onPress}>
+        <SVGIcon color={colors[color]} size={size} />
+      </Pressable>
+    );
+  }
   return <SVGIcon color={colors[color]} size={size} />;
 }
 
 const iconRegistry = {
+  arrowLeft: ArrowLeftIcon,
+  arroRight: ArrowRightIcon,
   bell: BellIcon,
   bellOn: BellOnIcon,
   bookmark: BookmarkIcon,
