@@ -1,20 +1,22 @@
-import {Text} from '../../../components/Text/Text';
-import {Button} from '../../../components/Button/Button';
-import {Screen} from '../../../components/Screen/Screen';
+import {
+  Text,
+  Button,
+  Screen,
+  FormTextInput,
+  FormPasswordInput,
+} from '@components';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../routes/Routes';
-import { useForm} from 'react-hook-form';
-import { Alert } from 'react-native';
-import { loginSchema, LoginSchema } from './loginSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormTextInput } from '../../../components/Form/FormTextInput';
-import { FormPasswordInput } from '../../../components/Form/FormPasswordInput';
+import {RootStackParamList} from '@routes';
+import {useForm} from 'react-hook-form';
+import {Alert} from 'react-native';
+import {loginSchema, LoginSchema} from './loginSchema';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
 export function LoginScreen({navigation}: ScreenProps) {
   const {control, formState, handleSubmit} = useForm<LoginSchema>({
-    resolver:zodResolver(loginSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {email: '', password: ''},
     mode: 'onChange',
   });
@@ -55,11 +57,15 @@ export function LoginScreen({navigation}: ScreenProps) {
         onPress={navigateToForgotPasswordScreen}
         color="primary"
         preset="paragraphSmall"
-        bold
-        >
+        bold>
         Esqueci minha senha
       </Text>
-      <Button mt="s48" title="Entrar" onPress={handleSubmit(submitForm)} disabled={!formState.isValid} />
+      <Button
+        mt="s48"
+        title="Entrar"
+        onPress={handleSubmit(submitForm)}
+        disabled={!formState.isValid}
+      />
       <Button
         onPress={navigateToSignUpScreen}
         preset="outline"

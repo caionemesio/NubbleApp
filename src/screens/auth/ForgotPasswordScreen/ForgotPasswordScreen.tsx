@@ -1,13 +1,13 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Button} from '../../../components/Button/Button';
-import {Screen} from '../../../components/Screen/Screen';
-import {Text} from '../../../components/Text/Text';
-import {RootStackParamList} from '../../../routes/Routes';
-import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
-import { forgotPasswordSchema, ForgotPasswordSchema } from './forgotpasswordSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { FormTextInput } from '../../../components/Form/FormTextInput';
+import {Text, Button, Screen, FormTextInput} from '@components';
+import {RootStackParamList} from '@routes';
+import {useResetNavigationSuccess} from '@hooks';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useForm} from 'react-hook-form';
+import {
+  forgotPasswordSchema,
+  ForgotPasswordSchema,
+} from './forgotpasswordSchema';
 
 type ScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -22,7 +22,7 @@ export function ForgotPasswordScreen({navigation}: ScreenProps) {
     mode: 'onChange',
   });
   const {reset} = useResetNavigationSuccess();
-  function submitForm(formValues:ForgotPasswordSchema) {
+  function submitForm(formValues: ForgotPasswordSchema) {
     console.log('Form Values:', formValues);
     reset({
       title: 'Enviamos as instruções para seu e-mail',
@@ -50,7 +50,11 @@ export function ForgotPasswordScreen({navigation}: ScreenProps) {
         placeholder="Digite seu Email"
         boxProps={{marginBottom: 's40'}}
       />
-      <Button title="Recuperar senha" onPress={handleSubmit(submitForm)} disabled={!formState.isValid} />
+      <Button
+        title="Recuperar senha"
+        onPress={handleSubmit(submitForm)}
+        disabled={!formState.isValid}
+      />
     </Screen>
   );
 }
