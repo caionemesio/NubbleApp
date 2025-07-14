@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+
 import {Text, Button, Screen, Icon} from '@components';
 import {RootStackParamList} from '@routes';
 

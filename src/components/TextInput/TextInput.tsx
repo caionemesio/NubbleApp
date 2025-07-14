@@ -1,18 +1,19 @@
+import {useRef} from 'react';
 import {
   Pressable,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
   TextStyle,
 } from 'react-native';
-import {Box, boxProps, $fontFamily, $fontSizes, Text} from '@components';
+
+import {Box, BoxProps, $fontFamily, $fontSizes, Text} from '@components';
 import {useAppTheme} from '@hooks';
-import {useRef} from 'react';
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
   RightComponent?: React.ReactElement;
-  boxProps?: boxProps;
+  boxProps?: BoxProps;
 }
 export function TextInput({
   label,
@@ -28,7 +29,7 @@ export function TextInput({
     inputRef.current?.focus();
   };
 
-  const $textInputContainer: boxProps = {
+  const $textInputContainer: BoxProps = {
     borderWidth: errorMessage ? 2 : 1,
     flexDirection: 'row',
     padding: 's16',
