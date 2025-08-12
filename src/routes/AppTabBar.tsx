@@ -20,7 +20,6 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
         const tabItem =
           mapScreenToProps[route.name as keyof AppTabBottomTabParamList];
 
-        console.log(tabItem);
         const isFocused = state.index === index;
 
         const onPress = () => {
