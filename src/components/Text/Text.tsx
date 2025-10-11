@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextStyle} from 'react-native';
+import {Platform, TextStyle} from 'react-native';
 
 import {createText} from '@shopify/restyle';
 
@@ -28,7 +28,7 @@ export function Text({
   return (
     <SRText
       color="backgroundContrast"
-      style={[$fontSizes[preset], {fontFamily}, style]}
+      style={[$fontSizes[preset], fontFamily, style]}
       {...sRTextProps}>
       {children}
     </SRText>
@@ -40,27 +40,49 @@ function getFontFamily(
   bold?: boolean,
   italic?: boolean,
   semiBold?: boolean,
-) {
+): TextStyle {
+  const isIOS = Platform.OS === 'ios';
+
   if (
     preset === 'headingLarge' ||
     preset === 'headingMedium' ||
     preset === 'headingSmall'
   ) {
-    return italic ? $fontFamily.boldItalic : $fontFamily.bold;
+    if (italic) {
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontWeight: '700', fontStyle: 'italic'}
+        : {fontFamily: $fontFamily.boldItalic};
+    }
+    return isIOS
+      ? {fontFamily: 'Satoshi', fontWeight: '700'}
+      : {fontFamily: $fontFamily.bold};
   }
+
   switch (true) {
     case bold && italic:
-      return $fontFamily.boldItalic;
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontWeight: '700', fontStyle: 'italic'}
+        : {fontFamily: $fontFamily.boldItalic};
     case bold:
-      return $fontFamily.bold;
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontWeight: '700'}
+        : {fontFamily: $fontFamily.bold};
     case italic:
-      return $fontFamily.italic;
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontStyle: 'italic'}
+        : {fontFamily: $fontFamily.italic};
     case semiBold && italic:
-      return $fontFamily.mediumItalic;
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontWeight: '600', fontStyle: 'italic'}
+        : {fontFamily: $fontFamily.mediumItalic};
     case semiBold:
-      return $fontFamily.medium;
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontWeight: '600'}
+        : {fontFamily: $fontFamily.medium};
     default:
-      return $fontFamily.regular;
+      return isIOS
+        ? {fontFamily: 'Satoshi', fontWeight: '400'}
+        : {fontFamily: $fontFamily.regular};
   }
 }
 

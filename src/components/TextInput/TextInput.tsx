@@ -37,15 +37,6 @@ export function TextInput({
     borderRadius: 's12',
   };
 
-  const $textInputStyle: TextStyle = {
-    padding: 0,
-    flexGrow: 1,
-    flexShrink: 1,
-    fontFamily: $fontFamily.regular,
-    color: colors.grayBlack,
-    ...$fontSizes.paragraphMedium,
-  };
-
   return (
     <Box {...boxProps}>
       <Pressable onPress={focusInput}>
@@ -56,7 +47,7 @@ export function TextInput({
           <RNTextInput
             ref={inputRef}
             placeholderTextColor={colors.gray2}
-            style={$textInputStyle}
+            style={{...$textInputStyle, color: colors.grayBlack}}
             autoCapitalize="none"
             {...rnTextInputProps}
           />
@@ -75,3 +66,10 @@ export function TextInput({
     </Box>
   );
 }
+export const $textInputStyle: TextStyle = {
+  padding: 0,
+  flexGrow: 1,
+  flexShrink: 1,
+  fontFamily: $fontFamily.regular,
+  ...$fontSizes.paragraphMedium,
+};
