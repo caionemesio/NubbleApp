@@ -4,5 +4,6 @@
   },
   "editor.autoClosingBrackets": "always",
   "editor.autoClosingQuotes": "always",
-  "editor.autoSurround": "languageDefined"
+  "editor.autoSurround": "languageDefined",
+  "cSpell.words": ["MMKV"]
 }

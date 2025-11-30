@@ -1,6 +1,6 @@
-import {Alert} from 'react-native';
-
+import {useAuthSignIn} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useToastService} from '@services';
 import {useForm} from 'react-hook-form';
 
 import {
@@ -15,14 +15,17 @@ import {AuthScreenProps} from '@routes';
 import {loginSchema, LoginSchema} from './loginSchema';
 
 export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
+  const {showToast} = useToastService();
+  const {signIn, isLoading} = useAuthSignIn({
+    onError: message => showToast({message, type: 'error'}),
+  });
   const {control, formState, handleSubmit} = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {email: '', password: ''},
     mode: 'onChange',
   });
   const submitForm = ({email, password}: LoginSchema) => {
-    Alert.alert('Form Submitted', `Email: ${email}, Password: ${password}`);
-    console.log('Form submitted', {email, password});
+    signIn({email, password});
   };
   function navigateToForgotPasswordScreen() {
     navigation.navigate('ForgotPasswordScreen');
@@ -61,6 +64,7 @@ export function LoginScreen({navigation}: AuthScreenProps<'LoginScreen'>) {
         Esqueci minha senha
       </Text>
       <Button
+        loading={isLoading}
         mt="s48"
         title="Entrar"
         onPress={handleSubmit(submitForm)}
