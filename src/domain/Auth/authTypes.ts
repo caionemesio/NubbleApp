@@ -17,3 +17,27 @@ export interface AuthCredentialsAPI {
   };
   user: UserAPI;
 }
+
+export interface SignUpDataApi {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface SignUpData {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+}
+export interface FieldIsAvailableAPI {
+  message: string;
+  isAvailable: boolean;
+}
+
+export interface ForgotPasswordParams {
+  email: string;
+}

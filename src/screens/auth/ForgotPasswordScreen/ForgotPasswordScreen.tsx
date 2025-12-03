@@ -1,4 +1,6 @@
+import {useAuthRequestNewPassword} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useToastService} from '@services';
 import {useForm} from 'react-hook-form';
 
 import {Text, Button, Screen, FormTextInput} from '@components';
@@ -19,18 +21,29 @@ export function ForgotPasswordScreen({
     defaultValues: {email: ''},
     mode: 'onChange',
   });
+  const {showToast} = useToastService();
   const {reset} = useResetNavigationSuccess();
+  const {requestNewPassword, isLoading} = useAuthRequestNewPassword({
+    onSuccess: () =>
+      reset({
+        title: 'Enviamos as instruções para seu e-mail',
+        description:
+          'Clique no link enviado no seu e-mail para recuperar sua senha',
+        icon: {
+          name: 'messageRound',
+          color: 'primary',
+        },
+      }),
+    onError: message =>
+      showToast({
+        message,
+        type: 'error',
+      }),
+  });
+
   function submitForm(formValues: ForgotPasswordSchema) {
-    console.log('Form Values:', formValues);
-    reset({
-      title: 'Enviamos as instruções para seu e-mail',
-      description:
-        'Clique no link enviado no seu e-mail para recuperar sua senha',
-      icon: {
-        name: 'messageRound',
-        color: 'primary',
-      },
-    });
+    requestNewPassword(formValues.email);
+
     // TODO: enviar o e-mail para recuperação de senha
   }
   return (
@@ -50,6 +63,7 @@ export function ForgotPasswordScreen({
       />
       <Button
         title="Recuperar senha"
+        loading={isLoading}
         onPress={handleSubmit(submitForm)}
         disabled={!formState.isValid}
       />

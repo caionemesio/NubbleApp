@@ -4,7 +4,10 @@ import Reactotron from 'reactotron-react-native';
 
 // Apenas executa o Reactotron em ambiente de desenvolvimento
 if (__DEV__) {
-  const tron = Reactotron.configure() // Usa as configurações padrão (host do localhost)
+  const tron = Reactotron.configure({
+    host: 'localhost',
+    port: 9090,
+  }) // Configura o host e porta
     .useReactNative() // Adiciona os plugins padrões do React Native
     .connect(); // Estabelece a conexão
 
