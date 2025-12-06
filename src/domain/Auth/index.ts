@@ -7,3 +7,4 @@ export * from './useCases/useAuthRequestNewPassword';
 
 export * from './authTypes';
 export * from './authService';
+export * from './authApi';

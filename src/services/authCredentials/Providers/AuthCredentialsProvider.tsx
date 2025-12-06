@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from 'react';
 
+import {registerInterceptor} from '@api';
 import {AuthCredentials, authService} from '@domain';
 
 import {authCredentialsStorage} from '../authCredentialsStorage';
@@ -33,6 +34,15 @@ export const AuthCredentialsProvider = ({
       setIsLoading(false);
     }
   }
+
+  useEffect(() => {
+    const interceptor = registerInterceptor({
+      authCredentials,
+      removeCredentials,
+      saveCredentials,
+    });
+    return interceptor;
+  }, [authCredentials]);
 
   async function saveCredentials(ac: AuthCredentials): Promise<void> {
     authService.updateToken(ac.token);
