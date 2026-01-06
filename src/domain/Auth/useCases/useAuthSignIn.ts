@@ -11,6 +11,9 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
     mutationFn: data => authService.signIn(data),
     retry: false,
     onSuccess: authCredentials => {
+      if (options?.onSuccess) {
+        options.onSuccess(authCredentials);
+      }
       saveCredentials(authCredentials);
     },
 
@@ -24,5 +27,7 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
   return {
     isLoading: mutation.isLoading,
     signIn: (variables: AuthBody) => mutation.mutate(variables),
+    isSuccess: mutation.isSuccess,
+    isError: mutation.isError,
   };
 }
