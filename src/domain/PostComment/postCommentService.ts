@@ -3,7 +3,7 @@ import {Page} from '@types';
 
 import {postCommentAdapter} from './postCommentAdapter';
 import {postCommentApi} from './postCommentApi';
-import {PostComment} from './PostCommentTypes';
+import {PostComment} from './postCommentTypes';
 
 const PER_PAGE = 10;
 async function getList(
