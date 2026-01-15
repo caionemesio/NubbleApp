@@ -9,6 +9,7 @@ import {AuthCredentialsService} from '../authCredentialsType';
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
   authCredentials: null,
   isLoading: true,
+  userId: null,
   saveCredentials: async () => {},
   removeCredentials: async () => {},
 });
@@ -61,6 +62,8 @@ export const AuthCredentialsProvider = ({
     startAuthCredentials();
   }, []);
 
+  const userId = authCredentials?.user.id || null;
+
   return (
     <AuthCredentialsContext.Provider
       value={{
@@ -68,6 +71,7 @@ export const AuthCredentialsProvider = ({
         isLoading,
         saveCredentials,
         removeCredentials,
+        userId: userId,
       }}>
       {children}
     </AuthCredentialsContext.Provider>
