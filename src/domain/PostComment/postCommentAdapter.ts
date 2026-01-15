@@ -1,6 +1,6 @@
 import {dateUtils} from '@utils';
 
-import {PostComment, PostCommentAPI} from './PostCommentTypes';
+import {PostComment, PostCommentAPI} from './postCommentTypes';
 
 function toPostComment(postCommentAPI: PostCommentAPI): PostComment {
   return {
