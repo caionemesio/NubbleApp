@@ -33,13 +33,17 @@ export function PostCommentItem({
     postAuthorId,
   );
   function confirmRemove() {
-    Alert.alert('Deseja excluir o comentário?', 'Pressione confirmar', [
-      {
-        text: 'Confirmar',
-        onPress: () => mutate({postCommentId: postComment.id}),
-      },
-      {text: 'Cancelar', style: 'cancel'},
-    ]);
+    Alert.alert(
+      'Deseja excluir o comentário?',
+      'Pressione confirmar para remover',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => mutate({postCommentId: postComment.id}),
+        },
+        {text: 'Cancelar', style: 'cancel'},
+      ],
+    );
   }
 
   return (
